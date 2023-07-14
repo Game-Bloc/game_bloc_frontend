@@ -1,0 +1,60 @@
+@font-face {
+  font-family: "valorant";
+  src: url("./fonts/valorant-Font.ttf");
+}
+
+.heroHeading,
+.heading2 {
+  font-family: "valorant";
+}
+
+/* PAGINATION BUTTONS */
+
+.paginationBttns {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0;
+}
+.paginationBttns li {
+  text-decoration: none;
+  list-style-type: none;
+}
+
+.paginationBttns a {
+  padding: 5px;
+  margin: 4px;
+  color: #808080;
+}
+
+.paginationBttns a:hover {
+  color: rgba(249, 142, 45, 0.5);
+}
+
+.activeBttn a {
+  color: rgba(249, 142, 45, 0.5);
+}
+
+.chatboxLayout {
+  width: 100%;
+  display: flex;
+  overflow-y: scroll;
+  height: 5rem;
+}
+
+.chatboxLayout::-webkit-scrollbar {
+  width: 0.2rem;
+}
+
+.chatboxLayout::-webkit-scrollbar-track {
+  border-radius: 9999px;
+}
+
+.chatboxLayout::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  border-radius: 9999px;
+}
+// .color{
+// 	color: #ffffff;
+// }
