@@ -12,7 +12,7 @@ import { Wrapper } from "./styles/commonStyles/Wrapper";
 import ActiveTournamentPage from "./pages/ActiveTournamentPage";
 import ActiveTournamentDetails from "./pages/ActiveTournamentDetails";
 import TournamentCategory from "./pages/TournamentCategory";
-import CreateTournament from "./pages/CreateTournament";
+import CreateTournament from "./Pages/CreateTournament";
 import NewsPage from "./pages/NewsPage";
 import NewsDetails from "./pages/NewsDetails";
 import ErrorPage from "./pages/ErrorPage";
