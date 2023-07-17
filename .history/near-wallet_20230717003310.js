@@ -24,13 +24,13 @@ export class Wallet {
   network;
   createAccessKeyFor;
 
-  constructor({ createAccessKeyFor = undefined, network = "mainnet" }) {
+  constructor({ createAccessKeyFor = undefined, network = "testnet" }) {
     // Login to a wallet passing a contractId will create a local
     // key, so the user skips signing non-payable transactions.
     // Omitting the accountId will result in the user being
     // asked to sign all transactions.
     this.createAccessKeyFor = createAccessKeyFor;
-    this.network = "mainnet";
+    this.network = "testnet";
   }
 
   // To be called when the website loads
@@ -42,16 +42,7 @@ export class Wallet {
         setupLedger({ iconUrl: LedgerIconUrl }),
       ],
     });
-    this.walletSelector.options.network.officialRpc =
-      this.walletSelector.options.network.nodeUrl;
-    if (localStorage.getItem("use_own_rpc_url")) {
-      if (this.network === "testnet" && localStorage.getItem("testnet_rpc_url"))
-        this.walletSelector.options.network.nodeUrl =
-          localStorage.getItem("testnet_rpc_url");
-      if (this.network === "mainnet" && localStorage.getItem("mainnet_rpc_url"))
-        this.walletSelector.options.network.nodeUrl =
-          localStorage.getItem("mainnet_rpc_url");
-    }
+
     const isSignedIn = this.walletSelector.isSignedIn();
 
     if (isSignedIn) {
