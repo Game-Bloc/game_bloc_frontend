@@ -5,6 +5,8 @@ import { Paragraph } from "../../styles/commonStyles/Paragraph";
 import { Text } from "../../styles/commonStyles/Text";
 import LoginModal from "../Popup/LoginModal";
 import React from "react";
+import { Img } from "../../styles/commonStyles/Img";
+import logo from "../../assets/images/gamelogo3.png";
 
 interface Props {
   wallet: any;
@@ -72,14 +74,12 @@ export const Footer = ({ wallet }: Props) => {
           margin=" 0  6.25rem 0 6.25rem"
           display="flex"
           flexDirection="row"
-          smmargin=".3rem"
+          smmargin=".3rem 1rem"
           justifyContent="space-between"
           alignItems="center"
           backgroundColor="#F6B8FC"
         >
-          <Text fontsize="1rem" fontWeight={600} color="#01070E">
-            Logo
-          </Text>
+          <Img src={logo} alt="" width="22%" mdwidth="25%" smwidth="6.5rem" />
           <Container
             display="flex"
             flexDirection="row"

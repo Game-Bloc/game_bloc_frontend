@@ -9,34 +9,143 @@ import {
   Friends,
   NewsIcon,
 } from "../styles/icon/Icons";
-import {
-  CAccordion,
-  CAccordionItem,
-  CAccordionHeader,
-  CAccordionBody,
-} from "@coreui/react";
-import "@coreui/coreui/dist/css/coreui.min.css";
+
 import styled from "styled-components";
 import { NavLink, useNavigate } from "react-router-dom";
 import { Container } from "../styles/commonStyles/Container.styles";
+import type { MenuProps } from "antd";
+import { Menu } from "antd";
+import {
+  AppstoreOutlined,
+  MailOutlined,
+  SettingOutlined,
+} from "@ant-design/icons";
 
+type MenuItem = Required<MenuProps>["items"][number];
+
+function getItem(
+  label: React.ReactNode,
+  key: React.Key,
+  icon?: React.ReactNode,
+  children?: MenuItem[],
+  type?: "group"
+): MenuItem {
+  return {
+    key,
+    icon,
+    children,
+    label,
+    type,
+  } as MenuItem;
+}
+
+const rootSubmenuKeys = ["sub1", "sub2", "sub4"];
 const SideBar = () => {
   const navigate = useNavigate();
   const [toggleOverview, setToggleOverview] = useState<boolean>(false);
   const [toggleTournament, setToggleTournament] = useState<boolean>(false);
 
-  const vars: any = {
-    "--cui-accordion-bg": "#01070E",
-    "--cui-accordion-body-padding-y": "0px",
-    "--cui-accordion-body-padding-x": "0px",
-    "--cui-accordion-btn-padding-y": "0px",
-    "--cui-accordion-btn-padding-x": "0px",
-    "--cui-accordion-border-width": "0px",
-    "--cui-accordion-btn-focus-box-shadow": "unset",
-    "--cui-accordion-btn-icon": "unset",
-    "--cui-accordion-btn-active-icon": "unset",
-    "--cui-accordion-active-bg": "#01070E",
-    "--cui-accordion-active-color": "#F6B8FC",
+  // submenu keys of first level
+
+  const items: MenuItem[] = [
+    getItem(
+      <CustomContainer
+        display="flex"
+        flexDirection="row"
+        alignItems="center"
+        mdjustifycontent="center"
+        height="fit-content"
+        width="100%"
+        margin="1rem"
+        mdmargin="0 0 0 3rem"
+        cursor="pointer"
+        onClick={() => navigate("/")}
+      >
+        <Text
+          className="text"
+          color="#F6B8FC"
+          fontWeight={600}
+          fontsize=".8rem"
+          mddisplay="none"
+        >
+          Overview
+        </Text>
+      </CustomContainer>,
+
+      "sub1",
+
+      <OverViewIcon className="icon" color="#F6B8FC" />
+    ),
+    getItem(
+      <CustomContainer
+        display="flex"
+        flexDirection="row"
+        alignItems="center"
+        mdjustifycontent="center"
+        height="fit-content"
+        width="100%"
+        margin="1rem"
+        mdmargin="0 0 0 3rem"
+        cursor="pointer"
+      >
+        <Text
+          className="text"
+          color="#F6B8FC"
+          fontWeight={600}
+          fontsize=".8rem"
+          mddisplay="none"
+        >
+          Tournament
+        </Text>
+      </CustomContainer>,
+      "sub2",
+
+      <TournamentIcon className="icon" color="#F6B8FC" />,
+
+      [
+        getItem(
+          <Text
+            hovercolor="#F6B8FC"
+            color="#c3c2c2"
+            fontWeight={600}
+            fontsize=".8rem"
+            onClick={() => navigate("/active-tournament")}
+          >
+            Active Tournament
+          </Text>,
+          "5"
+        ),
+        getItem(
+          <Text
+            hovercolor="#F6B8FC"
+            color="#c3c2c2"
+            fontWeight={600}
+            fontsize=".8rem"
+            onClick={() => navigate("/active-tournament")}
+          >
+            CrowFunded
+          </Text>,
+          "6"
+        ),
+      ]
+    ),
+    getItem("Navigation Three", "sub4", "", [
+      getItem("Option 9", "9"),
+      getItem("Option 10", "10"),
+      getItem("Option 11", "11"),
+      getItem("Option 12", "12"),
+    ]),
+  ];
+
+  const [openKeys, setOpenKeys] = useState(["sub1"]);
+
+  const onOpenChange: MenuProps["onOpenChange"] = (keys) => {
+    const latestOpenKey = keys.find((key) => openKeys.indexOf(key) === -1);
+    if (rootSubmenuKeys.indexOf(latestOpenKey!) === -1) {
+      setOpenKeys(keys);
+    } else {
+      setOpenKeys(latestOpenKey ? [latestOpenKey] : []);
+    }
   };
 
   return (
@@ -52,288 +161,188 @@ const SideBar = () => {
       flexDirection="column"
       xmdisplay="none"
     >
-      <CustomContainer
-        display="flex"
-        flexDirection="row"
-        alignItems="center"
-        mdjustifycontent="center"
-        height="fit-content"
-        width="100%"
-        margin=" 5rem 1rem 1rem 1rem"
-        cursor="pointer"
-        position="relative"
-        onClick={() => setToggleOverview(!toggleOverview)}
-      >
-        <Wrapper
-          padding=".4rem .5rem"
-          className="wrapper"
-          borderRadius="8px"
-          margin="0 1rem 0 0"
-        >
-          <OverViewIcon className="icon" />
-        </Wrapper>
-
-        <NavBarLink
-          to="/"
-          className={({ isActive, isPending }) =>
-            isPending ? "pending" : isActive ? "active" : ""
-          }
-        >
-          Overview
-        </NavBarLink>
-
-        {toggleOverview && (
-          <Container
-            position="absolute"
-            backgroundColor="#01070E"
-            width="100%"
-            top="2.5rem"
-            right="0rem"
-            borderStyle="solid"
-            borderWidth="1px"
-            borderColor="#2a2a2a"
-            zIndex="10000"
-            padding=".6rem"
-            borderRadius="10px"
-            mddisplay="flex"
-            justifyContent="center"
-            alignItems="center"
-            display="none"
-          >
-            <Text
-              className="text"
-              color="#fff"
-              fontWeight={600}
-              fontsize=".8rem"
-              backgroundColor="#01070E"
-              onClick={() => navigate("/")}
-            >
-              Overview
-            </Text>
-          </Container>
-        )}
-      </CustomContainer>
-
-      <Wrapper mddisplay="none">
-        <CAccordion flush style={vars}>
-          <CAccordionItem itemKey={1}>
-            <CAccordionHeader>
-              <CustomContainer
-                display="flex"
-                flexDirection="row"
-                alignItems="center"
-                mdjustifycontent="center"
-                height="fit-content"
-                width="100%"
-                margin="1rem"
-                mdmargin="0 0 0 3rem"
-                cursor="pointer"
-              >
-                <Wrapper
-                  padding=".4rem .5rem"
-                  className="wrapper"
-                  borderRadius="8px"
-                  margin="0 1rem 0 0"
-                >
-                  <TournamentIcon className="icon" />
-                </Wrapper>
-                <Text
-                  className="text"
-                  color="#fff"
-                  fontWeight={600}
-                  fontsize=".8rem"
-                  mddisplay="none"
-                >
-                  Tournament
-                </Text>
-              </CustomContainer>
-            </CAccordionHeader>
-            <CAccordionBody>
-              <MenuOption1
-                to="/active-tournament"
-                className={({ isActive, isPending }) =>
-                  isPending ? "pending" : isActive ? "active" : ""
-                }
-              >
-                Active Tournament
-              </MenuOption1>{" "}
-              <br />
-              <br />
-              <MenuOption2
-                to=""
-                className={({ isActive, isPending }) =>
-                  isPending ? "pending" : isActive ? "active" : ""
-                }
-              >
-                CrowFunded
-              </MenuOption2>
-            </CAccordionBody>
-          </CAccordionItem>
-        </CAccordion>
-      </Wrapper>
-
-      <CustomContainer
-        display="flex"
-        flexDirection="row"
-        alignItems="center"
-        mdjustifycontent="center"
-        height="fit-content"
-        width="100%"
-        margin="1rem"
-        cursor="pointer"
-        maxdisplay="none"
-        onClick={() => setToggleTournament(!toggleTournament)}
-      >
-        <Wrapper
-          padding=".4rem .5rem"
-          className="wrapper"
-          borderRadius="8px"
-          margin="0 1rem 0 0"
-        >
-          <TournamentIcon className="icon" />
-        </Wrapper>
-        <NavBarLink3
-          to="/error-page"
-          className={({ isActive, isPending }) =>
-            isPending ? "pending" : isActive ? "active" : ""
-          }
-        >
-          Tournament
-        </NavBarLink3>
-        {toggleTournament && (
-          <Container
-            position="absolute"
-            backgroundColor="#01070E"
-            width="100%"
-            top="15%"
-            right="0rem"
-            borderStyle="solid"
-            borderWidth="1px"
-            borderColor="#2a2a2a"
-            zIndex="10000"
-            padding=".6rem"
-            borderRadius="10px"
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
-            maxdisplay="none"
-            flexDirection="column"
-          >
-            <Text
-              hovercolor="#F6B8FC"
-              color="#fff"
-              fontWeight={600}
-              fontsize=".8rem"
-              backgroundColor="#01070E"
-              onClick={() => navigate("/active-tournament")}
-            >
-              Active Tournament
-            </Text>
-            <Text
-              hovercolor="#F6B8FC"
-              margin="1rem 0 0 0"
-              color="#fff"
-              fontWeight={600}
-              fontsize=".8rem"
-              backgroundColor="#01070E"
-              onClick={() => navigate("")}
-            >
-              Crowdfunded
-            </Text>
-          </Container>
-        )}
-      </CustomContainer>
-
-      <CustomContainer
-        display="flex"
-        flexDirection="row"
-        alignItems="center"
-        mdjustifycontent="center"
-        height="fit-content"
-        width="100%"
-        margin="1rem"
-        cursor="pointer"
-      >
-        <Wrapper
-          padding=".4rem .5rem"
-          className="wrapper"
-          borderRadius="8px"
-          margin="0 1rem 0 0"
-        >
-          <GameIcon className="icon" />
-        </Wrapper>
-        <NavBarLink3
-          to="/error-page"
-          className={({ isActive, isPending }) =>
-            isPending ? "pending" : isActive ? "active" : ""
-          }
-        >
-          Game
-        </NavBarLink3>
-      </CustomContainer>
-
-      <CustomContainer
-        display="flex"
-        flexDirection="row"
-        alignItems="center"
-        mdjustifycontent="center"
-        height="fit-content"
-        width="100%"
-        margin="1rem"
-        cursor="pointer"
-      >
-        <Wrapper
-          padding=".4rem .5rem"
-          className="wrapper"
-          borderRadius="8px"
-          margin="0 1rem 0 0"
-        >
-          <Friends className="icon" />
-        </Wrapper>
-        <Text
-          className="text"
-          color="#fff"
-          fontWeight={600}
-          fontsize=".8rem"
-          mddisplay="none"
-        >
-          Friends
-        </Text>
-      </CustomContainer>
-
-      <CustomContainer
-        display="flex"
-        flexDirection="row"
-        alignItems="center"
-        mdjustifycontent="center"
-        height="fit-content"
-        width="100%"
-        margin="1rem"
-        cursor="pointer"
-      >
-        <Wrapper
-          padding=".4rem .5rem"
-          className="wrapper"
-          borderRadius="8px"
-          margin="0 1rem 0 0"
-        >
-          <NewsIcon className="icon" />
-        </Wrapper>
-        <Text
-          className="text"
-          color="#fff"
-          fontWeight={600}
-          fontsize=".8rem"
-          mddisplay="none"
-        >
-          News
-        </Text>
-      </CustomContainer>
+      <Menu
+        mode="inline"
+        openKeys={openKeys}
+        onOpenChange={onOpenChange}
+        style={{
+          height: "100vh",
+          marginTop: "3rem",
+          backgroundColor: " #01070E",
+        }}
+        items={items}
+      />
     </Wrapper>
   );
 };
 
 export default SideBar;
+
+// <Wrapper mddisplay="none">
+
+//         {" "}
+//         <br />
+//         <br />
+
+// </Wrapper>
+
+// <CustomContainer
+//   display="flex"
+//   flexDirection="row"
+//   alignItems="center"
+//   mdjustifycontent="center"
+//   height="fit-content"
+//   width="100%"
+//   margin="1rem"
+//   cursor="pointer"
+//   maxdisplay="none"
+//   onClick={() => setToggleTournament(!toggleTournament)}
+// >
+//   <Wrapper
+//     padding=".4rem .5rem"
+//     className="wrapper"
+//     borderRadius="8px"
+//     margin="0 1rem 0 0"
+//   >
+//     <TournamentIcon className="icon" />
+//   </Wrapper>
+//   <NavBarLink3
+//     to="/error-page"
+//     className={({ isActive, isPending }) =>
+//       isPending ? "pending" : isActive ? "active" : ""
+//     }
+//   >
+//     Tournament
+//   </NavBarLink3>
+//   {toggleTournament && (
+//     <Container
+//       position="absolute"
+//       backgroundColor="#01070E"
+//       width="100%"
+//       top="15%"
+//       right="0rem"
+//       borderStyle="solid"
+//       borderWidth="1px"
+//       borderColor="#2a2a2a"
+//       zIndex="10000"
+//       padding=".6rem"
+//       borderRadius="10px"
+//       display="flex"
+//       justifyContent="center"
+//       alignItems="center"
+//       maxdisplay="none"
+//       flexDirection="column"
+//     >
+//       <Text
+//         hovercolor="#F6B8FC"
+//         color="#fff"
+//         fontWeight={600}
+//         fontsize=".8rem"
+//         backgroundColor="#01070E"
+//         onClick={() => navigate("/active-tournament")}
+//       >
+//         Active Tournament
+//       </Text>
+//       <Text
+//         hovercolor="#F6B8FC"
+//         margin="1rem 0 0 0"
+//         color="#fff"
+//         fontWeight={600}
+//         fontsize=".8rem"
+//         backgroundColor="#01070E"
+//         onClick={() => navigate("")}
+//       >
+//         Crowdfunded
+//       </Text>
+//     </Container>
+//   )}
+// </CustomContainer>
+
+// <CustomContainer
+//   display="flex"
+//   flexDirection="row"
+//   alignItems="center"
+//   mdjustifycontent="center"
+//   height="fit-content"
+//   width="100%"
+//   margin="1rem"
+//   cursor="pointer"
+// >
+//   <Wrapper
+//     padding=".4rem .5rem"
+//     className="wrapper"
+//     borderRadius="8px"
+//     margin="0 1rem 0 0"
+//   >
+//     <GameIcon className="icon" />
+//   </Wrapper>
+//   <NavBarLink3
+//     to="/error-page"
+//     className={({ isActive, isPending }) =>
+//       isPending ? "pending" : isActive ? "active" : ""
+//     }
+//   >
+//     Game
+//   </NavBarLink3>
+// </CustomContainer>
+
+// <CustomContainer
+//   display="flex"
+//   flexDirection="row"
+//   alignItems="center"
+//   mdjustifycontent="center"
+//   height="fit-content"
+//   width="100%"
+//   margin="1rem"
+//   cursor="pointer"
+// >
+//   <Wrapper
+//     padding=".4rem .5rem"
+//     className="wrapper"
+//     borderRadius="8px"
+//     margin="0 1rem 0 0"
+//   >
+//     <Friends className="icon" />
+//   </Wrapper>
+//   <Text
+//     className="text"
+//     color="#fff"
+//     fontWeight={600}
+//     fontsize=".8rem"
+//     mddisplay="none"
+//   >
+//     Friends
+//   </Text>
+// </CustomContainer>
+
+// <CustomContainer
+//   display="flex"
+//   flexDirection="row"
+//   alignItems="center"
+//   mdjustifycontent="center"
+//   height="fit-content"
+//   width="100%"
+//   margin="1rem"
+//   cursor="pointer"
+// >
+//   <Wrapper
+//     padding=".4rem .5rem"
+//     className="wrapper"
+//     borderRadius="8px"
+//     margin="0 1rem 0 0"
+//   >
+//     <NewsIcon className="icon" />
+//   </Wrapper>
+//   <Text
+//     className="text"
+//     color="#fff"
+//     fontWeight={600}
+//     fontsize=".8rem"
+//     mddisplay="none"
+//   >
+//     News
+//   </Text>
+// </CustomContainer>
 
 const NavBarLink = styled(NavLink)`
   font-size: 0.8rem;
