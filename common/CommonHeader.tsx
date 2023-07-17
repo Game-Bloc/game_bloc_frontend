@@ -42,6 +42,7 @@ const CommonHeader = ({ wallet }: any) => {
   const signOut = () => {
     wallet.signOut();
   };
+
   const username = useAppSelector((state) => state.profile.username);
 
   return (
