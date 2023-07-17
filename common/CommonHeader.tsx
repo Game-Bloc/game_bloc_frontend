@@ -31,6 +31,8 @@ import { MobileCustomContainer } from "../styles/custom/MobileCustomContainer";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useAppSelector } from "../redux/hooks";
 import styled from "styled-components";
+import logo from "../assets/images/gamelogo2.png";
+import logo2 from "../assets/images/gameIcon.png";
 import React from "react";
 
 const CommonHeader = ({ wallet }: any) => {
@@ -40,6 +42,7 @@ const CommonHeader = ({ wallet }: any) => {
   const signOut = () => {
     wallet.signOut();
   };
+
   const username = useAppSelector((state) => state.profile.username);
 
   return (
@@ -59,9 +62,7 @@ const CommonHeader = ({ wallet }: any) => {
     >
       <Menu onClick={() => setOpenMenu(!openMenu)} />
 
-      <Text fontsize="1.25rem" fontWeight={600}>
-        Logo
-      </Text>
+      <Img src={logo} alt="" width="15%" mdwidth="25%" smwidth="6.5rem" />
 
       <Container
         display="flex"
@@ -300,14 +301,7 @@ const CommonHeader = ({ wallet }: any) => {
               margin="3rem 0"
               width="100%"
             >
-              <Text
-                fontsize="1.25rem"
-                fontWeight={700}
-                textAlign="center"
-                color="#01070E"
-              >
-                Logo
-              </Text>
+              <Img src={logo2} alt="" smwidth="4.5rem" />
             </Wrapper>
 
             <Container>
