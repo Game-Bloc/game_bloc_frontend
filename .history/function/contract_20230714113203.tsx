@@ -22,7 +22,7 @@ export const useGetTournamentData = () => {
         }
         console.log(`data: ${JSON.stringify(data.tournament.length)}`);
         setLoading(false);
-      } else if (data.tournament.length === 0 || undefined) {
+      } else if (data.tournament.length === 0) {
         setLoading(false);
         setNoData(true);
       }
