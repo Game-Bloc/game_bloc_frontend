@@ -16,7 +16,7 @@ export const useGetTournamentData = () => {
     setLoading(true);
     try {
       const data = await gamebloc.getAllTournaments();
-      console.log("data:", data?.tournament);
+      console.log(data?.tournament);
       setNoData(true);
       if (data?.tournament?.length !== 0) {
         for (let i = 0; i < data.tournament.length; i++) {
