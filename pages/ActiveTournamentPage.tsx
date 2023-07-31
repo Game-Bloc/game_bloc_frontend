@@ -109,7 +109,7 @@ const ActiveTournamentPage = () => {
                   fontWeight={400}
                   margin="0 0 0 .3rem"
                 >
-                  {data.owner_id.substring(0, data.owner_id.length - 4)}
+                  {data.owner_id.substring(0, data.owner_id.length - 8)}
                 </Paragraph>
               </Wrapper>
             </Container>

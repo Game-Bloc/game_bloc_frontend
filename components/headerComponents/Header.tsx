@@ -1,10 +1,10 @@
 import React from "react";
 import { Container } from "../../styles/commonStyles/Container.styles";
-import { Text } from "../../styles/headerStyle/Header.styled";
 import Login from "./Login";
 import logo from "../../assets/images/gamelogo2.png";
 import Navbar from "./Navbar";
 import { Img } from "../../styles/commonStyles/Img";
+
 interface Props {
   isSignedIn: any;
   wallet: any;
@@ -21,6 +21,7 @@ const Header = ({ isSignedIn, wallet, gamebloc }: Props) => {
       alignItems="center"
     >
       <Img src={logo} alt="" width="22%" mdwidth="25%" smwidth="6.5rem" />
+
       <Navbar />
       <Login isSignedIn={isSignedIn} wallet={wallet} gamebloc={gamebloc} />
     </Container>

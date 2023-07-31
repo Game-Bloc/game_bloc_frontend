@@ -24,6 +24,7 @@ import { AiOutlineTransaction } from "react-icons/ai";
 import { VscSignOut } from "react-icons/vsc";
 import { HiOutlineMenuAlt2 } from "react-icons/hi";
 import { GoBell } from "react-icons/go";
+import { SiDiscord } from "react-icons/si";
 
 export const Menu = styled(HiOutlineMenuAlt2)`
   width: 1.6rem;
@@ -193,4 +194,12 @@ export const SignOut = styled(VscSignOut)`
   color: ${(props) => (props.color ? props.color : "#F97066")};
   font-size: 1.5rem;
   cursor: pointer;
+`;
+export const Discord = styled(SiDiscord)`
+  color: ${(props) => (props.color ? props.color : "#ffffff58")};
+  font-size: ${(props) => (props.fontSize ? props.fontSize : "16px")};
+  cursor: pointer;
+  &:hover {
+    color: #fff;
+  }
 `;
