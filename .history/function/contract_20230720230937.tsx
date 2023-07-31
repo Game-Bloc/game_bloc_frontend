@@ -14,24 +14,19 @@ export const useGetTournamentData = () => {
 
   const getData = async () => {
     setLoading(true);
-    try {
-      const data = await gamebloc.getAllTournaments();
+    await gamebloc.getAllTournaments().then((data: any) => {
       if (data.tournament.length !== 0) {
         for (let i = 0; i < data.tournament.length; i++) {
           let dataArray = data.tournament[i];
           dispatch(addToActiveTournament(dataArray));
         }
         console.log(`data: ${JSON.stringify(data.tournament.length)}`);
-      } else {
+        setLoading(false);
+      } else if (data.tournament.length === 0 || undefined) {
+        setLoading(false);
         setNoData(true);
       }
-    } catch (error) {
-      // Handle the error here (e.g., show an error message, log the error, etc.).
-      console.error("Error fetching tournament data:", error);
-      setNoData(true);
-    } finally {
-      setLoading(false);
-    }
+    });
   };
 
   return { getData, loading, noData };
@@ -41,11 +36,9 @@ export const useUpdateTournament = () => {
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState<boolean>(false);
   const array: TournamentType[] = [];
-
   const fetchData = async () => {
     setLoading(true);
-    try {
-      const data = await gamebloc.getAllTournaments();
+    await gamebloc.getAllTournaments().then((data: any) => {
       if (data.tournament) {
         for (let i = 0; i < data.tournament.length; i++) {
           let dataArray = data.tournament[i];
@@ -54,15 +47,11 @@ export const useUpdateTournament = () => {
         dispatch(clearTournaments());
         array.forEach((item) => {
           dispatch(addToActiveTournament(item));
+          setLoading(false);
         });
       }
-    } catch (error) {
-      // Handle the error here (e.g., show an error message, log the error, etc.).
-      console.error("Error fetching tournament data:", error);
-    } finally {
-      setLoading(false);
-    }
+    });
+    setLoading(false);
   };
-
   return { fetchData, loading };
 };

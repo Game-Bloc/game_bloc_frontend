@@ -9,10 +9,10 @@ import { Provider } from "react-redux";
 import { store } from "./redux/store";
 
 export const wallet = new Wallet({
-  createAccessKeyFor: "khiyoshi.near",
+  createAccessKeyFor: process.env.MAINNET_CONTRACTID,
 });
 export const gamebloc = new GameBloc({
-  contractId: "khiyoshi.near",
+  contractId: process.env.MAINNET_CONTRACTID,
   walletToUse: wallet,
 });
 

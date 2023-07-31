@@ -16,15 +16,17 @@ export const useGetTournamentData = () => {
     setLoading(true);
     try {
       const data = await gamebloc.getAllTournaments();
-      if (data.tournament.length !== 0) {
-        for (let i = 0; i < data.tournament.length; i++) {
-          let dataArray = data.tournament[i];
-          dispatch(addToActiveTournament(dataArray));
-        }
-        console.log(`data: ${JSON.stringify(data.tournament.length)}`);
-      } else {
-        setNoData(true);
-      }
+      console.log(data?.tournament);
+      setNoData(true);
+      // if (data?.tournament?.length !== 0) {
+      //   // for (let i = 0; i < data.tournament.length; i++) {
+      //   //   let dataArray = data.tournament[i];
+      //   //   dispatch(addToActiveTournament(dataArray));
+      //   // }
+      //   // console.log(`data: ${JSON.stringify(data.tournament.length)}`);
+      // } else {
+      //   setNoData(true);
+      // }
     } catch (error) {
       // Handle the error here (e.g., show an error message, log the error, etc.).
       console.error("Error fetching tournament data:", error);

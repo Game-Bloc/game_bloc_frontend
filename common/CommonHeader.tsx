@@ -21,8 +21,6 @@ import {
   MobileGameIcon,
   MobileOverViewIcon,
   MobileTournamentIcon,
-  MobileFriendsIcon,
-  MobileNewsIcon,
 } from "../styles/icon/Icons";
 import avatar from "../assets/images/avatar.png";
 import img from "../assets/images/img9.png";
@@ -61,8 +59,16 @@ const CommonHeader = ({ wallet }: any) => {
       zIndex="1"
     >
       <Menu onClick={() => setOpenMenu(!openMenu)} />
-
-      <Img src={logo} alt="" width="15%" mdwidth="25%" smwidth="6.5rem" />
+      <div onClick={() => navigate("/home")}>
+        <Img
+          cursor="pointer"
+          src={logo}
+          alt=""
+          width="15%"
+          mdwidth="25%"
+          smwidth="6.5rem"
+        />
+      </div>
 
       <Container
         display="flex"
@@ -87,6 +93,7 @@ const CommonHeader = ({ wallet }: any) => {
             color="#fff"
             placeHolderColor="#ffffff"
             placeholder="Search"
+            width="7rem"
           />
         </Container>
 
@@ -186,6 +193,7 @@ const CommonHeader = ({ wallet }: any) => {
               padding=".5rem"
               alignItems="center"
               margin="0.5rem 0rem"
+              onClick={() => navigate("/profile")}
             >
               <Person className="icon" />
               <Text fontWeight={400} margin="0 0 .5rem 1.5rem" className="icon">
@@ -325,7 +333,7 @@ const CommonHeader = ({ wallet }: any) => {
 
                 <NavBarLink1
                   onClick={() => setOpenMenu(false)}
-                  to="/"
+                  to="/home"
                   className={({ isActive, isPending }) =>
                     isPending ? "pending" : isActive ? "active" : ""
                   }
@@ -381,15 +389,15 @@ const CommonHeader = ({ wallet }: any) => {
 
                 <NavBarLink3
                   onClick={() => setOpenMenu(false)}
-                  to="/error-pag"
+                  to="/profile"
                   className={({ isActive, isPending }) =>
                     isPending ? "pending" : isActive ? "active" : ""
                   }
                 >
-                  Game
+                  Profile
                 </NavBarLink3>
               </MobileCustomContainer>
-              <MobileCustomContainer
+              {/* <MobileCustomContainer
                 display="flex"
                 flexDirection="row"
                 alignItems="center"
@@ -409,12 +417,12 @@ const CommonHeader = ({ wallet }: any) => {
 
                 <NavBarLink4
                   onClick={() => setOpenMenu(false)}
-                  to=""
+                  to="/profile"
                   className={({ isActive, isPending }) =>
                     isPending ? "pending" : isActive ? "active" : ""
                   }
                 >
-                  Friends
+                  Profile
                 </NavBarLink4>
               </MobileCustomContainer>
               <MobileCustomContainer
@@ -444,7 +452,40 @@ const CommonHeader = ({ wallet }: any) => {
                 >
                   News
                 </NavBarLink5>
-              </MobileCustomContainer>
+              </MobileCustomContainer> */}
+            </Container>
+
+            <Container
+              display="flex"
+              alignItems="flex-end"
+              justifyContent="center"
+              height="50%"
+              width="100%"
+            >
+              <CustomContainer
+                display="flex"
+                flexDirection="row"
+                width="100%"
+                cursor="pointer"
+                borderRadius="10px"
+                padding=".5rem"
+                alignItems="center"
+                margin="0rem 0rem 1rem 17%"
+                onClick={() => {
+                  navigate("/home");
+                  signOut();
+                }}
+              >
+                <SignOut className="icon" />
+                <Text
+                  fontWeight={400}
+                  margin="0 0 0 1.5rem"
+                  className=""
+                  color=" #F97066"
+                >
+                  Sign Out
+                </Text>
+              </CustomContainer>
             </Container>
           </Wrapper>
         </Container>

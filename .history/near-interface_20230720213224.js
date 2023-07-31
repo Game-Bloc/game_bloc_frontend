@@ -11,7 +11,7 @@ export class GameBloc {
 
   async new_tournament(userID, tournamentID, gameName, users, prize) {
     return await this.wallet.callMethod({
-      contractId: "khiyoshi.near",
+      contractId: this.contractId,
       method: "new_tournament",
       args: {
         owner_id: userID,
@@ -24,9 +24,9 @@ export class GameBloc {
   }
 
   async getAllTournaments() {
-    console.log("ContratId:");
+    console.log("ContratId:", contractId);
     return await this.wallet.callMethod({
-      contractId: "khiyoshi.near",
+      contractId: this.contractId,
       method: "get_all_tournaments",
       args: {},
     });
@@ -34,7 +34,7 @@ export class GameBloc {
 
   async initializeContract(userID) {
     return await this.wallet.callMethod({
-      contractId: "khiyoshi.near",
+      contractId: this.contractId,
       method: "new",
       args: { owner_id: JSON.parse(userID).accountId },
     });
@@ -42,7 +42,7 @@ export class GameBloc {
 
   async joinTournament(userID, id) {
     return await this.wallet.callMethod({
-      contractId: "khiyoshi.near",
+      contractId: this.contractId,
       method: "join_tournament",
       args: { user_id: userID, tournament_id: id },
     });

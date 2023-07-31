@@ -15,7 +15,8 @@ export const useGetTournamentData = () => {
   const getData = async () => {
     setLoading(true);
     try {
-      const data = await gamebloc.getAllTournaments();
+      const data = { tournament: [] };
+      // await gamebloc.getAllTournaments();
       if (data.tournament.length !== 0) {
         for (let i = 0; i < data.tournament.length; i++) {
           let dataArray = data.tournament[i];

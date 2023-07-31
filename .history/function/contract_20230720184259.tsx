@@ -16,7 +16,8 @@ export const useGetTournamentData = () => {
     setLoading(true);
     try {
       const data = await gamebloc.getAllTournaments();
-      if (data.tournament.length !== 0) {
+      console.log(data?.tournament);
+      if (data?.tournament?.length !== 0) {
         for (let i = 0; i < data.tournament.length; i++) {
           let dataArray = data.tournament[i];
           dispatch(addToActiveTournament(dataArray));
