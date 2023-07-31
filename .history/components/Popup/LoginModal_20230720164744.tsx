@@ -28,7 +28,6 @@ const LoginModal = ({ modal, wallet }: Props) => {
                 <Button
                   onClick={() => {
                     wallet.signIn();
-                    navigate("/home");
                   }}
                 >
                   Near
