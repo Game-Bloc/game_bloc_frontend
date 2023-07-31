@@ -49,34 +49,21 @@ const App = ({ isSignedIn, wallet, gamebloc }: Props) => {
 
   if (!isSignedIn) {
     return (
-      <Suspense
-        fallback={
-          <Container
-            width="100%"
-            height="100vh"
-            justifyContent="center"
-            alignItems="center"
-          >
-            <Loader />
-          </Container>
-        }
-      >
-        <Container>
-          <GlobalStyles />
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <HomePage
-                  isSignedIn={isSignedIn}
-                  wallet={wallet}
-                  gamebloc={gamebloc}
-                />
-              }
-            />
-          </Routes>
-        </Container>
-      </Suspense>
+      <Container>
+        <GlobalStyles />
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <HomePage
+                isSignedIn={isSignedIn}
+                wallet={wallet}
+                gamebloc={gamebloc}
+              />
+            }
+          />
+        </Routes>
+      </Container>
     );
   } else if (isSignedIn) {
     return (
