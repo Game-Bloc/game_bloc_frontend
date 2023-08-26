@@ -42,7 +42,7 @@ const OverviewPage = () => {
     } else {
       accountJSON = JSON.parse(account!);
       const accountID = accountJSON.accountId;
-      setUserName(accountID.substring(0, accountID.length - 8));
+      setUserName(accountID.substring(0, accountID.length - 5));
       dispatch(updateProfile(user));
       console.log(user);
     }
