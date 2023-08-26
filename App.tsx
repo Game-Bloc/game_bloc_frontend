@@ -38,11 +38,6 @@ interface Props {
 
 const App = ({ isSignedIn, wallet, gamebloc }: Props) => {
   const navigate = useNavigate();
-  // useEffect(() => {
-  //  if (isSignedIn){
-  //    navigate('/overview')
-  //  }
-  // }, []);
 
   if (!isSignedIn) {
     return (
