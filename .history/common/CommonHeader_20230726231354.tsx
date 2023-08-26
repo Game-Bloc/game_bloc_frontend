@@ -64,7 +64,7 @@ const CommonHeader = ({ wallet }: any) => {
           cursor="pointer"
           src={logo}
           alt=""
-          width="9rem"
+          width="15%"
           mdwidth="25%"
           smwidth="6.5rem"
         />

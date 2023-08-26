@@ -79,7 +79,7 @@ export const Footer = ({ wallet }: Props) => {
           alignItems="center"
           backgroundColor="#F6B8FC"
         >
-          <Img src={logo} alt="" width="9rem" mdwidth="25%" smwidth="6.5rem" />
+          <Img src={logo} alt="" width="22%" mdwidth="25%" smwidth="6.5rem" />
           <Container
             display="flex"
             flexDirection="row"
