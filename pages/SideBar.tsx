@@ -59,7 +59,7 @@ const SideBar = () => {
         margin="1rem"
         mdmargin="0 0 0 3rem"
         cursor="pointer"
-        onClick={() => navigate("/")}
+        onClick={() => navigate("/home")}
       >
         <Text
           className="text"
