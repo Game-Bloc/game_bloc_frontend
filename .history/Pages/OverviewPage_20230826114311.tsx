@@ -1,14 +1,28 @@
-import { useEffect, useState } from "react";
-import ActiveStreams from "../components/overViewPageComponents/ActiveStreams";
+import { useEffect, useState, lazy } from "react";
+// import ActiveStreams from "../components/overViewPageComponents/ActiveStreams";
 import ActiveTournament from "../components/overViewPageComponents/ActiveTournament";
-import GamingHub from "../components/overViewPageComponents/GamingHub";
-import PopularGame from "../components/overViewPageComponents/PopularGame";
-import SliderView from "../components/overViewPageComponents/SliderView";
+// import GamingHub from "../components/overViewPageComponents/GamingHub";
+// import PopularGame from "../components/overViewPageComponents/PopularGame";
+// import SliderView from "../components/overViewPageComponents/SliderView";
 import { Container } from "../styles/commonStyles/Container.styles";
 import { useAppDispatch } from "../redux/hooks";
 import { updateProfile } from "../redux/slice/profileSlice";
 import { ProfileState } from "../redux/slice/profileSlice";
 import React from "react";
+
+const ActiveStreams = lazy(
+  () => import("../components/overViewPageComponents/ActiveStreams")
+);
+const SliderView = lazy(
+  () => import("../components/overViewPageComponents/SliderView")
+);
+const PopularGame = lazy(
+  () => import("../components/overViewPageComponents/PopularGame")
+);
+const GamingHub = lazy(
+  () => import("../components/overViewPageComponents/GamingHub")
+);
+
 const OverviewPage = () => {
   const account =
     localStorage.getItem("near_app_wallet_auth_key") === null
@@ -28,7 +42,7 @@ const OverviewPage = () => {
     } else {
       accountJSON = JSON.parse(account!);
       const accountID = accountJSON.accountId;
-      setUserName(accountID.substring(0, accountID.length - 8));
+      setUserName(accountID.substring(0, accountID.length - 5));
       dispatch(updateProfile(user));
       console.log(user);
     }
