@@ -3,12 +3,10 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 
 export interface ProfileState {
   username: string | undefined;
-  userID: string | undefined;
 }
 
 const initialState: ProfileState = {
   username: "",
-  userID: "",
 };
 
 export const profileSlice = createSlice({
@@ -20,7 +18,6 @@ export const profileSlice = createSlice({
       { payload }: PayloadAction<ProfileState>
     ) => {
       state.username = payload.username;
-      state.userID = payload.userID;
     },
   },
 });
