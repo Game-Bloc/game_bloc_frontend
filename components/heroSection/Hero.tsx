@@ -35,7 +35,7 @@ const Hero = () => {
           fontsize="4.5rem"
           color="#F6B8FC"
         >
-          Lorem Ipsum Avec Sont Tues
+          Unlock the future of web3 gaming
         </Text>
         <Paragraph
           width="45%"
@@ -47,10 +47,9 @@ const Hero = () => {
           margin=".5rem 0 0 0"
           smmargin="0"
         >
-          Lorem ipsum dolor sit amet consectetur. Metus dui condimentum
-          venenatis eget. Posuere pretium elementum id integer. Neque sed enim
-          gravida consectetur. Suspendisse morbi leo morbi dignissim at non leo
-          aliquam.
+         Your Hub for Next-Gen Gaming! Join Crowdfunded Tournaments, Win
+          Prizes, and Empower Developers by Hosting Game Launch Events. The
+          Ultimate Social Platform for Gamers Awaits.
         </Paragraph>
       </Container>
       <Img
