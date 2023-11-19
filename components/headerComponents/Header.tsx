@@ -21,8 +21,6 @@ const Header = ({ isSignedIn, wallet, gamebloc }: Props) => {
       alignItems="center"
     >
       <Img src={logo} alt="" width="9rem" mdwidth="8rem" smwidth="6.5rem" />
-
-{/*       <Navbar /> */}
       <Login isSignedIn={isSignedIn} wallet={wallet} gamebloc={gamebloc} />
     </Container>
   );
